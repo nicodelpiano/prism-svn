@@ -1246,7 +1246,6 @@ public class MDPModelChecker extends ProbModelChecker
 		parm = new glp_smcp();
 		GLPK.glp_init_smcp(parm);
 		parm.setPrecision(this.getPrecision());
-		parm.setN_digits(10);
 		parm.setNum_states(nStates);
 
 		// Solve lp problem
