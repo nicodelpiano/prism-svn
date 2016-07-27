@@ -103,9 +103,9 @@ AUTOMAKE = ${SHELL} /home/delpi/Desktop/Development/Workspace/Java/prism-svn/pri
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -m64 -fPIC -DPIC -DHAVE_IEEE_754 -DBSD -DSIZEOF_VOID_P=8 -DSIZEOF_LONG=8  -O3
+CFLAGS = -g -O2
 CPP = gcc -E
-CPPFLAGS = -m64 -fPIC -DPIC -DHAVE_IEEE_754 -DBSD -DSIZEOF_VOID_P=8 -DSIZEOF_LONG=8  -O3
+CPPFLAGS = 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -125,7 +125,7 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /usr/bin/ld -m elf_x86_64
-LDFLAGS = -m64 -fPIC -DPIC -DHAVE_IEEE_754 -DBSD -DSIZEOF_VOID_P=8 -DSIZEOF_LONG=8  -O3
+LDFLAGS = 
 LIBOBJS = 
 LIBS = -lgmp -lm 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
