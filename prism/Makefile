@@ -305,7 +305,7 @@ EXACT_LP_REQUIREMENTS_INSTALLED = 1
 # Find swig
 DETECT_SWIG = $(shell which swig 2> /dev/null)
 
-ifeq ($(DETECT_SWIG),"")
+ifeq ($(DETECT_SWIG),)
 	EXACT_LP_REQUIREMENTS_INSTALLED = 0
 endif
 
