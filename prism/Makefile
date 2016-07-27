@@ -296,7 +296,7 @@ JAVA_INCLUDES = -I $(JAVA_JNI_H_DIR) -I $(JAVA_JNI_MD_H_DIR)
 
 MAKE_DIRS = dd jdd odd dv prism mtbdd sparse hybrid parser settings userinterface pepa/compiler simulator jltl2ba jltl2dstar explicit pta param strat automata
 
-EXT_PACKAGES = lpsolve55 lp_solve_5.5_java glpk
+EXT_PACKAGES = lpsolve55 lp_solve_5.5_java
 
 .PHONY: clean javadoc tests
 
@@ -361,21 +361,23 @@ extpackages: checks
 	done
 
 libglpk: checks
-	@echo Making glpk_java; \
-	(cd ext/glpk_java && \
-        $(MAKE) \
-	OSTYPE="$(OSTYPE)" \
-	ARCH="$(ARCH)" \
-	C="$(C)" \
-	CPP="$(CPP)" \
-	LIBPREFIX="$(LIBPREFIX)" \
-        LIBSUFFIX="$(LIBSUFFIX)" \
-        LIBMATH="$(LIBMATH)" \
-        BINDISTSUFFIX="$(BINDISTSUFFIX)" \
-        JAVA_DIR="$(JAVA_DIR)" \
-        JAVA_JNI_H_DIR="$(JAVA_JNI_H_DIR)" \
-        JAVA_JNI_MD_H_DIR="$(JAVA_JNI_MD_H_DIR)" \
-        ) || exit 1;
+	@for ext in glpk glpk_java; do \
+          echo Making $ext; \
+          (cd ext/$$ext && \
+          $(MAKE) \
+          OSTYPE="$(OSTYPE)" \
+          ARCH="$(ARCH)" \
+          C="$(C)" \
+          CPP="$(CPP)" \
+          LIBPREFIX="$(LIBPREFIX)" \
+          LIBSUFFIX="$(LIBSUFFIX)" \
+          LIBMATH="$(LIBMATH)" \
+          BINDISTSUFFIX="$(BINDISTSUFFIX)" \
+          JAVA_DIR="$(JAVA_DIR)" \
+          JAVA_JNI_H_DIR="$(JAVA_JNI_H_DIR)" \
+          JAVA_JNI_MD_H_DIR="$(JAVA_JNI_MD_H_DIR)" \
+          ) || exit 1; \
+	done
 
 prism: checks make_dirs bin_scripts
 
