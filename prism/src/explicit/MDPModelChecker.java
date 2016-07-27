@@ -345,12 +345,12 @@ public class MDPModelChecker extends ProbModelChecker
 		// Local copy of setting
 		MDPSolnMethod mdpSolnMethod = this.mdpSolnMethod;
 
-        // Switch to a supported method, if necessary
-        if (settings.EXACT_LP_REQUIREMENTS_INSTALLED == 0) {
-                mdpSolnMethod = MDPSolnMethod.GAUSS_SEIDEL;
-                mainLog.printWarning("Cannot compute exact linear programming. GLPK libraries are not properly installed");
-                mainLog.printWarning("Switching to MDP solution method \"" + mdpSolnMethod.fullName() + "\"");
-        }
+		// Switch to a supported method, if necessary
+		if (settings.EXACT_LP_REQUIREMENTS_INSTALLED == 0) {
+			mdpSolnMethod = MDPSolnMethod.GAUSS_SEIDEL;
+			mainLog.printWarning("Cannot compute exact linear programming. GLPK libraries are not properly installed");
+			mainLog.printWarning("Switching to MDP solution method \"" + mdpSolnMethod.fullName() + "\"");
+		}
 
 		// Check for some unsupported combinations
 		if (mdpSolnMethod == MDPSolnMethod.VALUE_ITERATION && valIterDir == ValIterDir.ABOVE) {

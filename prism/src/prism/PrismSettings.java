@@ -187,9 +187,6 @@ public class PrismSettings implements Observer
 	public static final	String LOG_SELECTION_COLOUR					= "log.selectionColour";
 	public static final	String LOG_BG_COLOUR						= "log.bgColour";
 	public static final	String LOG_BUFFER_LENGTH					= "log.bufferLength";
-	
-	//Exact LP requirements
-	public static final int EXACT_LP_REQUIREMENTS_INSTALLED			= 1;
 
 
 	//Defaults, types and constaints
@@ -425,13 +422,16 @@ public class PrismSettings implements Observer
 			{ INTEGER_TYPE,		LOG_BUFFER_LENGTH,						"Buffer length",						"2.1",			new Integer(10000),															"1,",																						"Length of the buffer for the log display." }
 		}
 	};
-	
+
 	public static final String[] oldPropertyNames =  {"simulator.apmcStrategy", "simulator.engine", "simulator.newPathAskDefault"};
-	
+
+	//Exact LP requirements
+	public final int EXACT_LP_REQUIREMENTS_INSTALLED = 1;
+
 	public DefaultSettingOwner[] optionOwners;
 	private Hashtable<String,Setting> data;
 	private boolean modified;
-	
+
 	private ArrayList<PrismSettingsListener> settingsListeners;
 	
 	/**

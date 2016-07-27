@@ -302,9 +302,12 @@ EXACT_LP_PACKAGES = glpk glpk_java
 
 EXACT_LP_REQUIREMENTS_INSTALLED = 1
 
-# Find glpsol
-DETECT_GLPSOL = $(shell which glpsol 2> /dev/null)
+# Find swig
 DETECT_SWIG = $(shell which swig 2> /dev/null)
+
+ifeq ($(DETECT_SWIG),"")
+	EXACT_LP_REQUIREMENTS_INSTALLED = 0
+endif
 
 .PHONY: clean javadoc tests
 
@@ -313,12 +316,13 @@ default: all
 all: cuddpackage extpackages exact_lp_requirements exact_lp prism
 
 exact_lp_requirements: checks
-	@if [ "$(DETECT_SWIG)" != "" ]; then echo "Found swig in $(DETECT_SWIG)"; \
+	@(if [ "$(DETECT_SWIG)" != "" ]; then \
+          echo "Found swig in $(DETECT_SWIG)"; \
 	else \
 	  echo "Warning: SWIG not found. Required for GLPK java bindings."; \
-	  $(eval EXACT_LP_REQUIREMENTS_INSTALLED=0) \
-	fi;
-	@sed -i '/EXACT_LP_REQUIREMENTS_INSTALLED/c\	public static final int EXACT_LP_REQUIREMENTS_INSTALLED			= $(EXACT_LP_REQUIREMENTS_INSTALLED);' src/prism/PrismSettings.java; \
+	fi)
+	@sed -i '/EXACT_LP_REQUIREMENTS_INSTALLED/c\	public final int EXACT_LP_REQUIREMENTS_INSTALLED = $(EXACT_LP_REQUIREMENTS_INSTALLED);' src/prism/PrismSettings.java;
+
 
 cuddpackage: checks
 	@if [ "$(CUDD_DIR)" = "" ]; then echo "Error: Cannot find CUDD"; exit 1; fi
@@ -379,7 +383,7 @@ extpackages: checks
 exact_lp: checks
 	@(if [ "$(EXACT_LP_REQUIREMENTS_INSTALLED)" = 1 ]; then \
 	  for ext in $(EXACT_LP_PACKAGES); do \
-           echo Making $ext; \
+           echo Making $$ext; \
            (cd ext/$$ext && \
            $(MAKE) \
            OSTYPE="$(OSTYPE)" \
