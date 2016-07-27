@@ -1,0 +1,13 @@
+libglpk_la-mygmp.lo: misc/mygmp.c /usr/include/stdc-predef.h misc/mygmp.h \
+ ../config.h /usr/include/x86_64-linux-gnu/gmp.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h
+
+/usr/include/stdc-predef.h:
+
+misc/mygmp.h:
+
+../config.h:
+
+/usr/include/x86_64-linux-gnu/gmp.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h:
