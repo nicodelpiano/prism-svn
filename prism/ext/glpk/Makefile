@@ -21,7 +21,6 @@ checks:
 	  cp bin/$(BINDISTSUFFIX)/$(LIBPREFIX)glpk$(LIBSUFFIX) ../../lib; \
 	else \
 	  (cd src/glpk && \
-           CPP=$(gcc -E) LD="" && \
            ./configure --with-gmp && \
            make \
 	  ) && cp --remove-destination src/glpk/src/.libs/$(LIBPREFIX)glpk$(LIBSUFFIX).40 ../../lib/; \

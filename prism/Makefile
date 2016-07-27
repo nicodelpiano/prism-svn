@@ -298,11 +298,27 @@ MAKE_DIRS = dd jdd odd dv prism mtbdd sparse hybrid parser settings userinterfac
 
 EXT_PACKAGES = lpsolve55 lp_solve_5.5_java
 
+EXACT_LP_PACKAGES = glpk glpk_java
+
+EXACT_LP_REQUIREMENTS_INSTALLED = 1
+
+# Find glpsol
+DETECT_GLPSOL = $(shell which glpsol 2> /dev/null)
+DETECT_SWIG = $(shell which swig 2> /dev/null)
+
 .PHONY: clean javadoc tests
 
 default: all
 
-all: cuddpackage extpackages libglpk prism
+all: cuddpackage extpackages exact_lp_requirements exact_lp prism
+
+exact_lp_requirements: checks
+	@if [ "$(DETECT_SWIG)" != "" ]; then echo "Found swig in $(DETECT_SWIG)"; \
+	else \
+	  echo "Warning: SWIG not found. Required for GLPK java bindings."; \
+	  EXACT_LP_REQUIREMENTS_INSTALLED=0; \
+	  sed -i '/EXACT_LP_REQUIREMENTS_INSTALLED/c/public static final int EXACT_LP_REQUIREMENTS_INSTALLED			= 0;' src/prism/PrismSettings.java; \
+	fi
 
 cuddpackage: checks
 	@if [ "$(CUDD_DIR)" = "" ]; then echo "Error: Cannot find CUDD"; exit 1; fi
@@ -360,24 +376,24 @@ extpackages: checks
 	  ) || exit 1; \
 	done
 
-libglpk: checks
-	@for ext in glpk glpk_java; do \
-          echo Making $ext; \
-          (cd ext/$$ext && \
-          $(MAKE) \
-          OSTYPE="$(OSTYPE)" \
-          ARCH="$(ARCH)" \
-          C="$(C)" \
-          CPP="$(CPP)" \
-          LIBPREFIX="$(LIBPREFIX)" \
-          LIBSUFFIX="$(LIBSUFFIX)" \
-          LIBMATH="$(LIBMATH)" \
-          BINDISTSUFFIX="$(BINDISTSUFFIX)" \
-          JAVA_DIR="$(JAVA_DIR)" \
-          JAVA_JNI_H_DIR="$(JAVA_JNI_H_DIR)" \
-          JAVA_JNI_MD_H_DIR="$(JAVA_JNI_MD_H_DIR)" \
-          ) || exit 1; \
-	done
+exact_lp: checks
+	@(if [ "$(EXACT_LP_REQUIREMENTS_INSTALLED)" = 1 ]; then \
+	  for ext in $(EXACT_LP_PACKAGES); do \
+           echo Making $ext; \
+           (cd ext/$$ext && \
+           $(MAKE) \
+           OSTYPE="$(OSTYPE)" \
+           ARCH="$(ARCH)" \
+           LIBPREFIX="$(LIBPREFIX)" \
+           LIBSUFFIX="$(LIBSUFFIX)" \
+           LIBMATH="$(LIBMATH)" \
+           BINDISTSUFFIX="$(BINDISTSUFFIX)" \
+           JAVA_DIR="$(JAVA_DIR)" \
+           JAVA_JNI_H_DIR="$(JAVA_JNI_H_DIR)" \
+           JAVA_JNI_MD_H_DIR="$(JAVA_JNI_MD_H_DIR)" \
+           ) || exit 1; \
+	  done \
+	fi)
 
 prism: checks make_dirs bin_scripts
 

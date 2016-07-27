@@ -528,7 +528,8 @@ public class DTMCModelChecker extends ProbModelChecker
 		LinEqMethod linEqMethod = this.linEqMethod;
 
 		// Switch to a supported method, if necessary
-		if (!(linEqMethod == LinEqMethod.POWER || linEqMethod == LinEqMethod.GAUSS_SEIDEL || linEqMethod == LinEqMethod.EXACT_LINEAR_PROGRAMMING)) {
+		if (!(linEqMethod == LinEqMethod.POWER || linEqMethod == LinEqMethod.GAUSS_SEIDEL
+				|| linEqMethod == LinEqMethod.EXACT_LINEAR_PROGRAMMING || settings.EXACT_LP_REQUIREMENTS_INSTALLED == 0)) {
 			linEqMethod = LinEqMethod.GAUSS_SEIDEL;
 			mainLog.printWarning("Switching to linear equation solution method \"" + linEqMethod.fullName() + "\"");
 		}

@@ -188,7 +188,10 @@ public class PrismSettings implements Observer
 	public static final	String LOG_BG_COLOUR						= "log.bgColour";
 	public static final	String LOG_BUFFER_LENGTH					= "log.bufferLength";
 	
-	
+	//Exact LP requirements
+	public static final int EXACT_LP_REQUIREMENTS_INSTALLED			= 1;
+
+
 	//Defaults, types and constaints
 	
 	public static final String[] propertyOwnerNames =
