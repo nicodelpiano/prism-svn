@@ -316,9 +316,9 @@ exact_lp_requirements: checks
 	@if [ "$(DETECT_SWIG)" != "" ]; then echo "Found swig in $(DETECT_SWIG)"; \
 	else \
 	  echo "Warning: SWIG not found. Required for GLPK java bindings."; \
-	  EXACT_LP_REQUIREMENTS_INSTALLED=0; \
-	  sed -i '/EXACT_LP_REQUIREMENTS_INSTALLED/c/public static final int EXACT_LP_REQUIREMENTS_INSTALLED			= 0;' src/prism/PrismSettings.java; \
-	fi
+	  $(eval EXACT_LP_REQUIREMENTS_INSTALLED=0) \
+	fi;
+	@sed -i '/EXACT_LP_REQUIREMENTS_INSTALLED/c\	public static final int EXACT_LP_REQUIREMENTS_INSTALLED			= $(EXACT_LP_REQUIREMENTS_INSTALLED);' src/prism/PrismSettings.java; \
 
 cuddpackage: checks
 	@if [ "$(CUDD_DIR)" = "" ]; then echo "Error: Cannot find CUDD"; exit 1; fi

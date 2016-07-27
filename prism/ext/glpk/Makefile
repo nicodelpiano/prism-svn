@@ -24,7 +24,6 @@ checks:
            ./configure --with-gmp && \
            make \
 	  ) && cp --remove-destination src/glpk/src/.libs/$(LIBPREFIX)glpk$(LIBSUFFIX).40 ../../lib/; \
-	  cp --remove-destination src/glpk/src/.libs/$(LIBPREFIX)glpk$(LIBSUFFIX) ../../lib/; \
 	fi)
 
 clean: checks

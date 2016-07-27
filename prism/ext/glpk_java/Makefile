@@ -17,12 +17,11 @@ checks:
 
 ../../lib/glpk_java:
 	@(if [ "$(OSTYPE)" != "cygwin" ]; then \
-          CPP="$(gcc -E)"; \
 	  (cd src/glpk_java && \
            ./configure && \
            make \
-	  ) && cp src/glpk_java/swig/glpk-java.jar ../../lib/; \
-	  cp src/glpk_java/swig/.libs/$(LIBPREFIX)glpk_java$(LIBSUFFIX) ../../lib/; \
+	  ) && cp --remove-destination src/glpk_java/swig/glpk-java.jar ../../lib/; \
+	  cp --remove-destination src/glpk_java/swig/.libs/$(LIBPREFIX)glpk_java$(LIBSUFFIX) ../../lib/; \
 	fi)
 
 clean: checks
