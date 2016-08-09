@@ -302,10 +302,22 @@ EXACT_LP_PACKAGES = glpk glpk_java
 
 EXACT_LP_REQUIREMENTS_INSTALLED = 1
 
-# Find swig
+# Find glpk_java requirements
 DETECT_SWIG = $(shell which swig 2> /dev/null)
+DETECT_MVN = $(shell which mvn 2> /dev/null)
+DETECT_LIBTOOL = $(shell which libtool 2> /dev/null)
+DETECT_JAVA_HOME = $(shell echo $(JAVA_HOME) 2> /dev/null)
 
 ifeq ($(DETECT_SWIG),)
+	EXACT_LP_REQUIREMENTS_INSTALLED = 0
+endif
+ifeq ($(DETECT_MVN),)
+	EXACT_LP_REQUIREMENTS_INSTALLED = 0
+endif
+ifeq ($(DETECT_LIBTOOL),)
+	EXACT_LP_REQUIREMENTS_INSTALLED = 0
+endif
+ifeq ($(DETECT_JAVA_HOME),)
 	EXACT_LP_REQUIREMENTS_INSTALLED = 0
 endif
 
@@ -316,11 +328,14 @@ default: all
 all: cuddpackage extpackages exact_lp_requirements exact_lp prism
 
 exact_lp_requirements: checks
-	@(if [ "$(DETECT_SWIG)" != "" ]; then \
-          echo "Found swig in $(DETECT_SWIG)"; \
-	else \
-	  echo "Warning: SWIG not found. Required for GLPK java bindings."; \
-	fi)
+	@if [ "$(DETECT_SWIG)" != "" ]; then echo "Found SWIG in $(DETECT_SWIG)"; \
+	else echo "Warning: SWIG not found. Required for GLPK java bindings."; fi
+	@if [ "$(DETECT_MVN)" != "" ]; then echo "Found MAVEN in $(DETECT_MVN)"; \
+	else echo "Warning: MAVEN not found. Required for GLPK java bindings."; fi
+	@if [ "$(DETECT_LIBTOOL)" != "" ]; then echo "Found LIBTOOL in $(DETECT_LIBTOOL)"; \
+	else echo "Warning: LIBTOOL not found. Required for GLPK java bindings."; fi
+	@if [ "$(DETECT_JAVA_HOME)" != "" ]; then echo "JAVA_HOME defined as $(DETECT_JAVA_HOME)"; \
+	else echo "Warning: JAVA_HOME not defined or exported. Required for GLPK java bindings."; fi
 	@sed -i '/EXACT_LP_REQUIREMENTS_INSTALLED/c\	public final int EXACT_LP_REQUIREMENTS_INSTALLED = $(EXACT_LP_REQUIREMENTS_INSTALLED);' src/prism/PrismSettings.java;
 
 

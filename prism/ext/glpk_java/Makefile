@@ -18,6 +18,9 @@ checks:
 ../../lib/glpk_java:
 	@(if [ "$(OSTYPE)" != "cygwin" ]; then \
 	  (cd src/glpk_java && \
+           export LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(cd ../../../glpk/src/glpk/src/.libs; pwd) && \
+           export CFLAGS=-I$(cd ../../../glpk/src/glpk/src; pwd) && \
+           export SWIGFLAGS=-I$(cd ../../../glpk/src/glpk/src; pwd) && \
            ./configure && \
            make \
 	  ) && cp --remove-destination src/glpk_java/swig/glpk-java.jar ../../lib/; \
