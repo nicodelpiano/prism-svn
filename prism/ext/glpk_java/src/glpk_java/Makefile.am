@@ -1,5 +1,5 @@
 ACLOCAL_AMFLAGS = -I m4
-SUBDIRS = doc swig
+SUBDIRS = swig
 
 EXTRA_DIST = examples w32 w64 autogen.sh
 

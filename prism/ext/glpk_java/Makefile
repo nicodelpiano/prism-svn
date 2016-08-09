@@ -9,6 +9,10 @@ default: all
 
 all: checks ../../lib/glpk_java
 
+LDPATH = $(shell cd ../glpk/src/glpk/src/.libs; pwd)
+CFLAGSPATH = $(shell cd ../glpk/src/glpk/src; pwd)
+SWIGFLAGSPATH = $(shell cd ../glpk/src/glpk/src; pwd)
+
 # Try and prevent accidental makes (i.e. called manually, not from top-level Makefile)
 checks:
 	@if [ "$(LIBSUFFIX)" = "" ]; then \
@@ -18,9 +22,11 @@ checks:
 ../../lib/glpk_java:
 	@(if [ "$(OSTYPE)" != "cygwin" ]; then \
 	  (cd src/glpk_java && \
-           export LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(cd ../../../glpk/src/glpk/src/.libs; pwd) && \
-           export CFLAGS=-I$(cd ../../../glpk/src/glpk/src; pwd) && \
-           export SWIGFLAGS=-I$(cd ../../../glpk/src/glpk/src; pwd) && \
+	   echo PATTTTHHH && \
+	   echo $(LDPATH); \
+           export LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LDPATH) && \
+           export CFLAGS=-I$(CFLAGSPATH) && \
+           export SWIGFLAGS=-I$(SWIGFLAGSPATH) && \
            ./configure && \
            make \
 	  ) && cp --remove-destination src/glpk_java/swig/glpk-java.jar ../../lib/; \
