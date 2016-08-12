@@ -307,6 +307,7 @@ DETECT_SWIG = $(shell which swig 2> /dev/null)
 DETECT_MVN = $(shell which mvn 2> /dev/null)
 DETECT_LIBTOOL = $(shell which libtool 2> /dev/null)
 DETECT_JAVA_HOME = $(shell echo $(JAVA_HOME) 2> /dev/null)
+DETECT_ACLOCAL = $(shell which aclocal 2> /dev/null)
 
 ifeq ($(DETECT_SWIG),)
 	EXACT_LP_REQUIREMENTS_INSTALLED = 0
@@ -318,6 +319,9 @@ ifeq ($(DETECT_LIBTOOL),)
 	EXACT_LP_REQUIREMENTS_INSTALLED = 0
 endif
 ifeq ($(DETECT_JAVA_HOME),)
+	EXACT_LP_REQUIREMENTS_INSTALLED = 0
+endif
+ifeq ($(DETECT_ACLOCAL),)
 	EXACT_LP_REQUIREMENTS_INSTALLED = 0
 endif
 
@@ -334,6 +338,8 @@ exact_lp_requirements: checks
 	else echo "Warning: MAVEN not found. Required for GLPK java bindings."; fi
 	@if [ "$(DETECT_LIBTOOL)" != "" ]; then echo "Found LIBTOOL in $(DETECT_LIBTOOL)"; \
 	else echo "Warning: LIBTOOL not found. Required for GLPK java bindings."; fi
+	@if [ "$(DETECT_ACLOCAL)" != "" ]; then echo "Found ACLOCAL in $(DETECT_ACLOCAL)"; \
+	else echo "Warning: ACLOCAL not found. Required for both GLPK and GLPK java bindings."; fi
 	@if [ "$(DETECT_JAVA_HOME)" != "" ]; then echo "JAVA_HOME defined as $(DETECT_JAVA_HOME)"; \
 	else echo "Warning: JAVA_HOME not defined or exported. Required for GLPK java bindings."; fi
 	@sed -i '/EXACT_LP_REQUIREMENTS_INSTALLED/c\	public final int EXACT_LP_REQUIREMENTS_INSTALLED = $(EXACT_LP_REQUIREMENTS_INSTALLED);' src/prism/PrismSettings.java;
