@@ -12521,7 +12521,7 @@ fi
 
 
 
-ac_config_files="$ac_config_files Makefile swig/Makefile"
+ac_config_files="$ac_config_files Makefile doc/Makefile swig/Makefile"
 
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: CFLAGS = $CFLAGS" >&5
@@ -13546,6 +13546,7 @@ do
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+    "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
     "swig/Makefile") CONFIG_FILES="$CONFIG_FILES swig/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;

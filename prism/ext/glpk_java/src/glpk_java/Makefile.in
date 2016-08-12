@@ -317,7 +317,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4
-SUBDIRS = swig
+SUBDIRS = doc swig
 EXTRA_DIST = examples w32 w64 autogen.sh
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive

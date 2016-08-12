@@ -22,8 +22,6 @@ checks:
 ../../lib/glpk_java:
 	@(if [ "$(OSTYPE)" != "cygwin" ]; then \
 	  (cd src/glpk_java && \
-	   echo PATTTTHHH && \
-	   echo $(LDPATH); \
            export LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LDPATH) && \
            export CFLAGS=-I$(CFLAGSPATH) && \
            export SWIGFLAGS=-I$(SWIGFLAGSPATH) && \
