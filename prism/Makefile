@@ -603,7 +603,7 @@ clean_cudd:
 	@(cd $(CUDD_DIR) && $(MAKE) distclean)
 
 clean_ext:
-	@(for ext in $(EXT_PACKAGES); do \
+	@(for ext in $(EXT_PACKAGES) $(EXACT_LP_PACKAGES); do \
 	  echo Cleaning $$ext ...; \
 	  (cd ext/$$ext && \
 	  $(MAKE) -s LIBPREFIX="$(LIBPREFIX)" LIBSUFFIX="$(LIBSUFFIX)" clean) \
