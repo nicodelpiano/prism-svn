@@ -15,6 +15,7 @@ SWIGFLAGSPATH = $(shell cd ../glpk/src/glpk/src; pwd)
 
 glpkjavavers = "1.7.0"
 
+IS_SRC_CREATED = $(shell find . -name "src" 2> /dev/null)
 ALREADY_DOWNLOADED = $(shell ls src | grep libglpk-java-$(glpkjavavers).tar.gz 2> /dev/null)
 ALREADY_INSTALLED_JAR = $(shell find src/glpk_java/swig -name glpk-java.jar 2> /dev/null)
 ALREADY_INSTALLED_LIB = $(shell find src/glpk_java/swig/.libs -name $(LIBPREFIX)glpk_java$(LIBSUFFIX) 2> /dev/null)
@@ -34,12 +35,14 @@ checks:
 	fi; 
 
 ../../lib/glpk_java:
-	@(if [ "$(OSTYPE)" != "cygwin" ] ]; then \
-	  (mkdir src/ && cd src/ && \
+	@(if [ "$(OSTYPE)" != "cygwin" ]; then \
+	  (if [ "$(IS_SRC_CREATED)" = "" ]; then \
+	   mkdir src ;fi) && \
+	  (cd src/ && \
 	   (if [ "$(ALREADY_DOWNLOADED)" = "" ]; then \
-	     wget http://download.sourceforge.net/project/glpk-java/glpk-java/glpk-java-$(glpkjavavers)/libglpk-java-$(glpkjavavers).tar.gz && \
-	     tar -xzf libglpk-java-$(glpkjavavers).tar.gz && \
-	     mv libglpk-java-$(glpkjavavers) glpk_java; \
+	    wget http://download.sourceforge.net/project/glpk-java/glpk-java/glpk-java-$(glpkjavavers)/libglpk-java-$(glpkjavavers).tar.gz && \
+	    tar -xzf libglpk-java-$(glpkjavavers).tar.gz && \
+	    mv libglpk-java-$(glpkjavavers) glpk_java; \
 	   fi) && \
 	   cd glpk_java/ && \
 	   (if [ $(ALREADY_INSTALLED) = 0 ]; then \

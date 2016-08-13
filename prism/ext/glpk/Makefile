@@ -11,6 +11,7 @@ all: checks ../../lib/glpk
 
 glpkvers = "4.60"
 
+IS_SRC_CREATED = $(shell find . -name "src" 2> /dev/null)
 ALREADY_DOWNLOADED = $(shell ls src | grep glpk-$(glpkvers).tar.gz 2> /dev/null)
 ALREADY_INSTALLED_LIB = $(shell find src/glpk/src/.libs -name $(LIBPREFIX)glpk$(LIBSUFFIX).40 2> /dev/null)
 ALREADY_INSTALLED = 1
@@ -27,7 +28,9 @@ checks:
 
 ../../lib/glpk:
 	@(if [ "$(OSTYPE)" != "cygwin" ]; then \
-	  (mkdir src/ && cd src/ && \
+	  (if [ "$(IS_SRC_CREATED)" = "" ]; then \
+	   mkdir src; fi) && \
+	   (cd src/ && \
 	   (if [ "$(ALREADY_DOWNLOADED)" = "" ]; then \
 	    wget http://ftp.gnu.org/gnu/glpk/glpk-$(glpkvers).tar.gz && \
 	    tar -xzf glpk-$(glpkvers).tar.gz && \
