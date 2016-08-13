@@ -332,6 +332,7 @@ default: all
 all: cuddpackage extpackages exact_lp_requirements exact_lp prism
 
 exact_lp_requirements: checks
+	cp ext/glpk_java/jar/glpk-java.jar lib
 	@if [ "$(DETECT_SWIG)" != "" ]; then echo "Found SWIG in $(DETECT_SWIG)"; \
 	else echo "Warning: SWIG not found. Required for GLPK java bindings."; fi
 	@if [ "$(DETECT_MVN)" != "" ]; then echo "Found MAVEN in $(DETECT_MVN)"; \
