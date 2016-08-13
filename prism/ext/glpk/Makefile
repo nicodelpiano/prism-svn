@@ -27,7 +27,7 @@ checks:
 
 ../../lib/glpk:
 	@(if [ "$(OSTYPE)" != "cygwin" ]; then \
-	  (cd src/ && \
+	  (mkdir src/ && cd src/ && \
 	   (if [ "$(ALREADY_DOWNLOADED)" = "" ]; then \
 	    wget http://ftp.gnu.org/gnu/glpk/glpk-$(glpkvers).tar.gz && \
 	    tar -xzf glpk-$(glpkvers).tar.gz && \

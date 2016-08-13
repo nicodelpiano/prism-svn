@@ -35,7 +35,7 @@ checks:
 
 ../../lib/glpk_java:
 	@(if [ "$(OSTYPE)" != "cygwin" ] ]; then \
-	  (cd src/ && \
+	  (mkdir src/ && cd src/ && \
 	   (if [ "$(ALREADY_DOWNLOADED)" = "" ]; then \
 	     wget http://download.sourceforge.net/project/glpk-java/glpk-java/glpk-java-$(glpkjavavers)/libglpk-java-$(glpkjavavers).tar.gz && \
 	     tar -xzf libglpk-java-$(glpkjavavers).tar.gz && \
