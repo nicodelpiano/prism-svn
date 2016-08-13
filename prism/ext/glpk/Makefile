@@ -41,7 +41,7 @@ checks:
 	    patch -p1 < ../../glpk_exact_solutions.patch && \
 	    ./autogen.sh > /dev/null && \
             ./configure --with-gmp > /dev/null && \
-            make; \
+            make > /dev/null; \
 	   fi) \
 	  ) && cp --remove-destination src/glpk/src/.libs/$(LIBPREFIX)glpk$(LIBSUFFIX).40 ../../lib/; \
 	fi)

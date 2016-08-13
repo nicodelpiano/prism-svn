@@ -52,7 +52,7 @@ checks:
             export SWIGFLAGS=-I$(SWIGFLAGSPATH) && \
 	    ./autogen.sh > /dev/null && \
             ./configure > /dev/null && \
-            make; \
+            make > /dev/null; \
 	   fi) \
 	  ) && cp --remove-destination src/glpk_java/swig/glpk-java.jar ../../lib/; \
 	  cp --remove-destination src/glpk_java/swig/.libs/$(LIBPREFIX)glpk_java$(LIBSUFFIX) ../../lib/; \
