@@ -25,6 +25,7 @@ checks:
            export LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LDPATH) && \
            export CFLAGS=-I$(CFLAGSPATH) && \
            export SWIGFLAGS=-I$(SWIGFLAGSPATH) && \
+	   ./autogen.sh && \
            ./configure && \
            make \
 	  ) && cp --remove-destination src/glpk_java/swig/glpk-java.jar ../../lib/; \

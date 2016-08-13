@@ -16,11 +16,9 @@ checks:
 	fi; 
 
 ../../lib/glpk:
-	@(if [ "$(OSTYPE)" = "cygwin" ]; then \
-	  cp bin/$(BINDISTSUFFIX)/glpk-java.jar ../../lib; \
-	  cp bin/$(BINDISTSUFFIX)/$(LIBPREFIX)glpk$(LIBSUFFIX) ../../lib; \
-	else \
+	@(if [ "$(OSTYPE)" != "cygwin" ]; then \
 	  (cd src/glpk && \
+	   ./autogen.sh && \
            ./configure --with-gmp && \
            make \
 	  ) && cp --remove-destination src/glpk/src/.libs/$(LIBPREFIX)glpk$(LIBSUFFIX).40 ../../lib/; \

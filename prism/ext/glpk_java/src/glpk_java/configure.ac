@@ -85,7 +85,6 @@ AC_CHECK_HEADER([jni.h],
 dnl Makefiles
 AC_CONFIG_FILES([
   Makefile
-  doc/Makefile
   swig/Makefile
   ])
 

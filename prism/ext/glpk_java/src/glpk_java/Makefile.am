@@ -1,7 +1,7 @@
 ACLOCAL_AMFLAGS = -I m4
-SUBDIRS = doc swig
+SUBDIRS = swig
 
-EXTRA_DIST = examples w32 w64 autogen.sh
+EXTRA_DIST = w32 w64 autogen.sh
 
 check-swing:
 	-for d in $(SUBDIRS); do (cd $$d && $(MAKE) check-swing ); done
