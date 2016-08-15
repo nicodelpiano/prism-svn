@@ -1266,7 +1266,10 @@ public class DTMCModelChecker extends ProbModelChecker
 					currentResult = GLPK.uint8Array_toString(GLPK.uint8ArrayArray_getitem(GLPK.glp_get_probs(lp), stateToMaybe.get(dtmcState) - 1));
 					exp = GLPK.intArray_getitem(GLPK.glp_get_exps(lp), stateToMaybe.get(dtmcState) - 1);
 					// We need to format the output since we get the exponent as a position in the string
-					currentResult = exp != 0 ? new StringBuilder(currentResult).insert(exp, ".").toString() : "0." + currentResult;
+					String zeroes = "";
+					for (int nZero = 0; nZero < Math.abs(exp); nZero++)
+						zeroes += "0";
+					currentResult = exp > 0 ? new StringBuilder(currentResult).insert(exp, ".").toString() : "0." + zeroes + currentResult;
 					probs[dtmcState] = currentResult; 
 				}
 				// If it is a `yes` state, its probability is 1
