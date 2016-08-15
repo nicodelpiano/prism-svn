@@ -1310,7 +1310,7 @@ public class MDPModelChecker extends ProbModelChecker
 			if (probs[mdpState] != "0")
 				mainLog.println("[" + mdpState + "]: " + probs[mdpState]);
 		}
-		mainLog.println("Exact probabilities calculation time: " +
+		mainLog.println("\nExact probabilities calculation time: " +
 				((double)System.currentTimeMillis() - exactSolverTimer)/1000 + " seconds");
 
 		// Free memory
