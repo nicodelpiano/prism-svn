@@ -1212,8 +1212,7 @@ public class MDPModelChecker extends ProbModelChecker
 					GLPK.doubleArray_setitem(val, eqIndex, -1);
 					eqIndex++;
 				}
-				// If the transition chosen is in the scheduler, then the current column is not basic.
-				// This is described in (10)
+				// This step is described in (10) on the paper
 				// If strat is null, it would mean that the strategy is not apt, so we should ignore
 				// the basis construction for this case
 				if (strat != null && choice == strat[state])
@@ -1291,7 +1290,10 @@ public class MDPModelChecker extends ProbModelChecker
 				currentResult = GLPK.uint8Array_toString(GLPK.uint8ArrayArray_getitem(GLPK.glp_get_probs(lp), stateToMaybe.get(mdpState) - 1));
 				exp = GLPK.intArray_getitem(GLPK.glp_get_exps(lp), stateToMaybe.get(mdpState) - 1);
 				// We need to format the output since we get the exponent as a position in the string
-				currentResult = exp != 0 ? new StringBuilder(currentResult).insert(exp, ".").toString() : "0." + currentResult;
+				String zeroes = "";
+				for (int nZero = 0; nZero < Math.abs(exp); nZero++)
+					zeroes += "0";
+				currentResult = exp > 0 ? new StringBuilder(currentResult).insert(exp, ".").toString() : "0." + zeroes + currentResult;
 				probs[mdpState] = currentResult;
 			}
 			// If it is a `yes` state, its probability is 1
