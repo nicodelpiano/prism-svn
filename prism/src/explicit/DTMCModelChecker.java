@@ -1217,7 +1217,6 @@ public class DTMCModelChecker extends ProbModelChecker
 
 				currentTransition++;
 			}
-
 			mainLog.println("Linear programming equations construction time: " +
 					((double)System.currentTimeMillis() - matATimer)/1000 + " seconds");
 
