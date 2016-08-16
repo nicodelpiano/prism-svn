@@ -38,6 +38,7 @@ checks:
 	@(if [ "$(OSTYPE)" != "cygwin" ]; then \
 	  (if [ "$(IS_SRC_CREATED)" = "" ]; then \
 	   mkdir src ;fi) && \
+	  export JAVA_HOME=$(JAVA_DIR) && \
 	  (cd src/ && \
 	   (if [ "$(ALREADY_DOWNLOADED)" = "" ]; then \
 	    wget http://download.sourceforge.net/project/glpk-java/glpk-java/glpk-java-$(glpkjavavers)/libglpk-java-$(glpkjavavers).tar.gz && \

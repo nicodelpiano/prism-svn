@@ -252,7 +252,7 @@ public class PrismSettings implements Observer
 																			"Epsilon value to use for checking termination of iterative numerical methods." },
 			{ INTEGER_TYPE,		PRISM_MAX_ITERS,						"Termination max. iterations",			"2.1",			new Integer(10000),															"0,",																						
 																			"Maximum number of iterations to perform if iterative methods do not converge." },
-			{ INTEGER_TYPE,		PRISM_PRECISION,						"Floating point precision",			"2.1",			new Integer(64),															"0,",																						
+			{ INTEGER_TYPE,		PRISM_PRECISION,						"Floating point precision",			"2.1",			new Integer(64),															"1,",																						
 																			"The accuracy of the mantissa (in bits) is determined by this variable. This user-selectable precision is a minimum value: it is rounded up to a whole limb." },
 			// MODEL CHECKING OPTIONS:
 			{ BOOLEAN_TYPE,		PRISM_PRECOMPUTATION,					"Use precomputation",					"2.1",			new Boolean(true),															"",																							
@@ -1045,7 +1045,7 @@ public class PrismSettings implements Observer
 			if (i < args.length - 1) {
 				try {
 					j = Integer.parseInt(args[++i]);
-					if (j < 0)
+					if (j <= 0)
 						throw new NumberFormatException("");
 					set(PRISM_PRECISION, j);
 				} catch (NumberFormatException e) {
