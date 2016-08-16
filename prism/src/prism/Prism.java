@@ -2787,9 +2787,9 @@ public class Prism extends PrismComponent implements PrismSettingsListener
 		}
 
 		// For exact model checking
-		if (settings.getBoolean(PrismSettings.PRISM_EXACT_ENABLED)) {
-			return modelCheckExact(propertiesFile, prop);
-		}
+		//if (settings.getBoolean(PrismSettings.PRISM_EXACT_ENABLED)) {
+		//	return modelCheckExact(propertiesFile, prop);
+		//}
 		// For fast adaptive uniformisation
 		if (currentModelType == ModelType.CTMC && settings.getString(PrismSettings.PRISM_TRANSIENT_METHOD).equals("Fast adaptive uniformisation")) {
 			FastAdaptiveUniformisationModelChecker fauMC;
