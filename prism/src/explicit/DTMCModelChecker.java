@@ -1227,9 +1227,9 @@ public class DTMCModelChecker extends ProbModelChecker
 
 			// Set up exact parameters
 			parm = new glp_smcp();
-			parm.setPrecision(10);
-			parm.setNum_states(nStates);
 			GLPK.glp_init_smcp(parm);
+			parm.setPrecision(this.getPrecision());
+			parm.setNum_states(nStates);
 
 			// Solve lp problem
 			exactSolverTimer = System.currentTimeMillis();
